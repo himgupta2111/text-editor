@@ -25,15 +25,15 @@ public class TextEditor {
   // Insert text after cursor
   public void insert(String text) {
     for (char c : text.toCharArray()) {
-      cursor.data = c;
-      Node newNode = new Node('|');
-      newNode.prev = cursor;
-      newNode.next = cursor.next;
-      if (cursor.next != null) {
-        cursor.next.prev = newNode;
+      Node newNode = new Node(c);
+      newNode.prev = cursor.prev;
+      newNode.next = cursor;
+      if (newNode.prev != null) {
+        newNode.prev.next = newNode;
+      } else {
+        head = newNode;
       }
-      cursor.next = newNode;
-      cursor = newNode;
+      cursor.prev = newNode;
     }
     displayText();
   }
